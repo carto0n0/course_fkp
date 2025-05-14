@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./catalogue-item.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const contacts = document.getElementById('contacts')
+
+            contacts.addEventListener('click', function () {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // или 'auto' — без анимации
+                });
+            })
+
+            function updateImages(theme) {
+                const images = document.querySelectorAll('img[data-light][data-dark]');
+                images.forEach(img => {
+                    img.src = img.dataset[theme];
+                });
+            }
+
+            const data = new URLSearchParams(window.location.search)
+
+            console.log(data.get('characteristics'))
+
+            const slider = document.querySelector('.slider');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            let slideIndex = 0;
+
+            const characteristics = document.querySelector('.characteristics__content')
+            const cost = document.querySelector('.cost')
+            const description = document.querySelector('.description__text')
+            const title = document.querySelector('.item-section__body__title')
+
+            characteristics.innerHTML = data.get('characteristics')
+            cost.innerHTML = `<h2>${data.get('cost')}</h2>`
+            description.innerHTML = `${data.get('description')}`
+            title.innerHTML = `<h1>${data.get('name')}</h1>`
+            // FILL SLIDER BY IMAGES
+            slider.innerHTML = ''
+            for(let image of data.get('images').split(',')) {
+                console.log(image)
+
+                const imageHTML = `
+                    <img src="./images/${image}">
+                `
+                console.log(imageHTML)
+                slider.innerHTML += imageHTML
+            }
+
+            const slides = Array.from(slider.querySelectorAll('img'));
+            const slideCount = slides.length;
+
+// Устанавливаем обработчики событий для кнопок
+            prevButton.addEventListener('click', showPreviousSlide);
+            nextButton.addEventListener('click', showNextSlide);
+
+// Функция для показа предыдущего слайда
+            function showPreviousSlide() {
+                slideIndex = (slideIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            }
+
+// Функция для показа следующего слайда
+            function showNextSlide() {
+                slideIndex = (slideIndex + 1) % slideCount;
+                updateSlider();
+            }
+
+// Функция для обновления отображения слайдера
+            function updateSlider() {
+                slides.forEach((slide, index) => {
+                    if (index === slideIndex) {
+                        slide.style.display = 'block';
+                    } else {
+                        slide.style.display = 'none';
+                    }
+                });
+            }
+
+// Инициализация слайдера
+            updateSlider();
+
+            const map = document.querySelector('.map-img');
+
+            map.addEventListener('click', function () {
+                window.open('https://yandex.by/maps/157/minsk/?ll=27.579977%2C53.916552&z=18', '_blank');
+            })
+
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeElements = [
+                'header',
+                'footer',
+                '.description'
+            ];
+            const darkLight = [
+                '.item-section',
+            ];
+            const themeText = [
+                'h1',
+                'h2',
+                'h3',
+                'a',
+                '.key'
+            ];
+            // можешь добавить любые селекторы
+
+            // Применяем тему при загрузке
+            (function () {
+                const savedTheme = localStorage.getItem('theme');
+                console.log(savedTheme)
+                updateImages(savedTheme)
+                if (savedTheme === 'dark') {
+                    themeElements.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        console.log(el)
+                        if(selector === '.director' || selector === '.catalogue-section') {
+                            el.classList.add('dark-light')
+                        } else if (el) {
+                            el.classList.add('dark');
+                        }
+                    });
+
+                    darkLight.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        if (el) {
+                            if (el) {
+                                el.classList.add('dark-light');
+                            }
+                        }
+                    });
+
+                    themeText.forEach(selector => {
+                        const el = document.querySelectorAll(selector);
+                        console.log(el)
+                        if (el) {
+                            console.log(el)
+                            console.log(el.classList)
+                            el.forEach(elem => {
+                                elem.classList.add('dark-text');
+                            });
+                        }
+                    });
+                }
+            })();
+
+            toggleBtn.addEventListener('click', () => {
+                let isDark;
+
+                themeElements.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark');
+                        }
+                    }
+                });
+
+                darkLight.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark-light');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark-light');
+                        }
+                    }
+                });
+
+                themeText.forEach(selector => {
+                    const el = document.querySelectorAll(selector);
+                    if (el) {
+                        el.forEach(elem => {
+                            elem.classList.toggle('dark-text');
+                        })
+
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el[0].classList.contains('dark-text');
+                        }
+                    }
+                });
+
+                updateImages(isDark ? 'dark' : 'light')
+
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+        })
+    </script>
+</head>
+<body>
+<header class="header" id="header">
+    <div class="header__container">
+        <div class="header-fix"><div class="header__logo">
+            <a href="file:///C:/projects/course_fkp/main.html">
+                <img
+                        src="./images/logo_light.png"
+                        data-light="./images/logo_light.png"
+                        data-dark="./images/logo_dark.png"
+                        alt="Soulmade Logo"/>
+            </a>
+        </div>
+            <nav class="header__nav">
+                <a href="file:///C:/projects/course_fkp/catalogue.html">Каталог</a>
+                <a href="#" id="contacts">Контакты</a>
+            </nav></div>
+
+        <div class="header__right">
+            <div class="header__search">
+                <input type="text" placeholder="Поиск…"/>
+                <button><i class="icon-search"></i></button>
+            </div>
+            <button class="icon-button" id="theme-toggle">
+                <img
+                        src="./images/theme_switcher.png"
+                        data-light="./images/theme_switcher.png"
+                        data-dark="./images/theme-switcher_dark.png"
+                >
+            </button>
+            <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                    src="./images/profile_light.png"
+                    data-light="./images/profile_light.png"
+                    data-dark="./images/profile_dark.png"
+            ></a>
+        </div>
+    </div>
+</header>
+    <section class="item-section">
+        <div class="item-section__body">
+            <div class="item-section__body__title">
+                <h1>ПОДВЕСКА "РАЗБИТОЕ СЕРДЦЕ"</h1>
+            </div>
+            <div class="item-section__body__slider-wrapper">
+                <div class="slider-container">
+                    <div class="btn-wrapper">
+                        <button class="prev-button">
+                            <img src="./images/left-arrow.png" alt="">
+                        </button>
+                    </div>
+                    <div class="slider">
+<!--                        <img src="https://i.postimg.cc/nhsTGkLQ/1.png" alt="Белый пушистый кот">-->
+<!--                        <img src="https://i.postimg.cc/cLVh9nKk/2.png" alt="Рыжий пушистый кот в джинсах">-->
+<!--                        <img src="https://i.postimg.cc/4NxWmZkP/3.png" alt="Бело-рыжий пушистый кот">-->
+<!--                        <img src="https://i.postimg.cc/FFZPrzq1/8.png" alt="Золотистый пушистый кот">-->
+<!--                        <img src="https://i.postimg.cc/jd3Zf9Rb/7.png" alt="Золотистый пушистый кот">-->
+                    </div>
+                    <div class="btn-wrapper">
+                        <button class="next-button">
+                            <img src="./images/right-arrow.png" alt="">
+                        </button>
+                    </div>
+                </div>
+                <div class="item-section__body__slider-wrapper__data">
+                    <div class="cost">
+<!--                        <h2>29,99BYN</h2>-->
+                    </div>
+                    <div class="characteristics">
+                        <div class="characteristics__title">
+                            <h2>ХАРАКТЕРИСТИКА</h2>
+                        </div>
+                        <div class="characteristics__content">
+                            <div>
+                                <span class="key">Артикул:</span><span class="value">2120230</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="add-basket text">
+                            Добавить в корзину
+                        </button>
+                        <div class="fav-wrapper">
+                            <img src="./images/white-heart.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item-section__footer">
+            <div class="description">
+                <div class="description__title">
+                    <h1>Описание</h1>
+                </div>
+                <div class="description__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur facilis magni nesciunt, nostrum pariatur perferendis porro. Delectus et harum in inventore, iusto necessitatibus officia rerum sed vitae voluptas. A, tempore.
+                </div>
+            </div>
+        </div>
+    </section>
+<footer>
+    <div class="footer-top">
+        <div class="footer-top__column">
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title">
+                        <a href="tel:+375290001122" class="text" style="text-decoration: none; color: inherit;">+375 (29) 000-11-22</a>
+                    </span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Круглосуточный телефон call-центра</span>
+                </div>
+            </div>
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title text">Ул. веры хоружей 1а, минск</span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Наш магазин</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">О НАС</span>
+            </div>
+            <p class="text">
+                Политика обработки
+                персональных данных
+            </p>
+            <p class="text">
+                Вакансии
+            </p>
+            <p class="text">
+                Настройки cookies
+            </p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КЛИЕНТАМ</span>
+            </div>
+            <p class="text">Оплата и доставка</p>
+            <p class="text">Возврат товара</p>
+            <p class="text">Бонусная программа</p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КОНТАКТЫ</span>
+            </div>
+            <div class="text">Служба поддержки</div>
+            <div class="text">HR-специалист</div>
+            <div class="text">Жалобы и предложения</div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <img src="./images/map-img.png" alt="" class="map-img prh">
+    </div>
+</footer>
+</body>
+</html>

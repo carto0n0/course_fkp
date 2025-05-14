@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./catalogue.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script>
+
+        window.localStorage.setItem('products',
+            [{
+                name: 'Мыло ручной работы',
+                cost: '12,99',
+                img: 'soap.png',
+                favorite: false,
+                popularity: 4.5,
+                type: 'chemistry',
+                images: [
+                    'soap1_remove.png',
+                    'soap2.png'
+                ],
+                description: 'Откройте для себя гармонию природы с нашим мылом ручной работы. Чистота белого сочетается с энергией зеленых разводов, созданных с использованием натуральных красителей. Бережная формула на основе натуральных масел деликатно очищает и питает кожу, оставляя ощущение свежести и мягкости.\n' +
+                    'Обогащено маслом ши для увлажнения и эфирным маслом чайного дерева для антибактериального эффекта.',
+                characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">2455685</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">мыло</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">белый, зелёный</span>
+                        </div>
+                        <div>
+                                <span class="key">Состав: </span><span class="value">
+                                NaOH, кокосовое масло, вода,
+                                масло ши, масло чайного дерева</span>
+                        </div>
+                        <div>
+                                <span class="key">Размеры (ШxВхТ): </span><span class="value">8см x 14см х 3см</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">210г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">разводы</span>
+                        </div>
+                    `
+            },
+                {
+                    name: 'Вязанная игрушка “Слоник”',
+                    cost: '34,99',
+                    img: 'elephant-toy.png',
+                    favorite: true,
+                    popularity: 4.9,
+                    type: 'toy',
+                    images: [
+                        'toy2_remove.png',
+                        'toy3.png'
+                    ],
+                    description: 'Вязаный крючком слоник - друг на всю жизнь! Этот очаровательный слоник, связанный крючком с любовью и заботой, станет верным другом для вашего малыша или милым украшением вашего дома. Его мягкая пряжа приятна на ощупь, а добрые глазки-бусинки наполнены теплом. Связан из гипоаллергенной пряжи, безопасен для самых маленьких. Идеальный подарок на рождение ребенка, крестины или просто для поднятия настроения! Ручная работа делает каждого слоника уникальным, с собственным характером и очарованием.',
+                },
+                {
+                    name: 'Подвеска “Разбитое сердце”',
+                    cost: '29,99',
+                    img: 'culon.png',
+                    favorite: false,
+                    popularity: 3.8,
+                    type: 'skin',
+                    images: [
+                        'kylon4.png',
+                        'kylon4_remove.png'
+                    ],
+                    description: 'Подвеска «Разбитое сердце»: Два сердца, одно целое.\n' +
+                        'Эта уникальная подвеска состоит из двух половинок, выполненных вручную из прозрачной смолы с завораживающими красными разводами. Каждая половинка символизирует часть души, а вместе они образуют квадрат с вырезанным сердцем — символ любви, которая, даже будучи разделённой, \n' +
+                        'сохраняет свою целостность.\n' +
+                        'Носите одну половинку сами, а вторую подарите близкому человеку, чтобы всегда чувствовать связь, даже находясь вдали друг от друга. Подвеска «Разбитое сердце» – это трогательный подарок для тех, кто ценит искренние чувства и верит в силу любви.\n',
+
+                },
+                {
+                    name: 'Набор кофейных подвесок',
+                    cost: '36,99',
+                    img: 'coffee.png',
+                    favorite: false,
+                    popularity: 4.2,
+                    type: 'skin',
+                    images: [
+                        'kylon3_remove.png',
+                        'kylon3.png'
+                    ],
+                    description: 'Подвеска "Аромат кофе": Оригинальная подвеска из прозрачной эпоксидной смолы с натуральными кофейными зернами внутри. Сочетание прозрачности смолы и богатого коричневого цвета кофейных зерен создает неповторимый эффект. Этот стильный аксессуар станет прекрасным дополнением к вашему образу и напомнит о любимом напитке в течение дня.',
+
+                },
+                {
+                    name: 'Ваза глинянная',
+                    cost: '45,99',
+                    img: 'vase_main.png',
+                    favorite: true,
+                    popularity: 2.8,
+                    type: 'pot',
+                    images: [
+                        'vase1.png',
+                        'vase1_remove.png'
+                    ],
+                    description: 'Оживите свой дом с помощью этой уникальной глиняной вазы ручной работы. Каждое изделие создано с любовью и вниманием к деталям, что делает его неповторимым. Эта ваза станет прекрасным акцентом в любом интерьере, добавив ему тепла и уюта. Идеально подходит для свежих цветов, сухоцветов или просто как декоративный элемент.\n' +
+                        'Каждая ваза уникальна и может незначительно отличаться от других.',
+                    characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">2454515</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">ваза</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">коричневый</span>
+                        </div>
+                        <div>
+                                <span class="key">Материал: </span><span class="value">
+                                глина</span>
+                        </div>
+                        <div>
+                                <span class="key">Размеры (ДxВ): </span><span class="value">12см x 30см</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">520г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">натуральный</span>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Браслет сапфир',
+                    cost: '22,99',
+                    img: 'pearls-product.png',
+                    favorite: false,
+                    popularity: 4.7,
+                    type: 'skin',
+                    images: [
+                        'braslet.png',
+                        'braslet1_remove.png'
+                    ],
+                    description: 'Браслет "Сапфир": Элегантный браслет ручной работы, состоящий из нескольких нитей зеленых камней. Разнообразие оттенков, от нежного фисташкового до насыщенного изумрудного, создает неповторимый эффект. Каждый камень тщательно отобран и отполирован, чтобы подчеркнуть его природную красоту. Браслет станет прекрасным дополнением к вашему вечернему или повседневному наряду.',
+                    characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">5444545</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">браслет</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">зеленый</span>
+                        </div>
+                        <div>
+                                <span class="key">Размер: </span><span class="value">17-21</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">162г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">натуральный</span>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Вязанная игрушка “Зайчик”',
+                    cost: '35,99',
+                    img: 'rabbit-toy.png',
+                    favorite: false,
+                    popularity: 3.3,
+                    type: 'toy',
+                    images: [
+                        'toy1_remove.png',
+                        'toy4.png'
+                    ],
+                    description: 'Мягкий вязаный крючком зайчик - пушистый комочек радости! Этот милый зайчик, связанный крючком, станет любимой игрушкой вашего ребенка. Его длинные ушки так приятно обнимать, а мягкая пряжа дарит ощущение тепла и уюта. Он идеально подходит для игр, обнимашек и засыпания. Связан из мягкой и гипоаллергенной пряжи, безопасен для детей любого возраста. Каждый зайчик уникален благодаря ручной работе, с любовью связанной петля к петельке.',
+
+                },
+                {
+                    name: 'Глинянный набор посуды',
+                    cost: '78,99',
+                    img: 'posuda.png',
+                    favorite: false,
+                    popularity: 4.1,
+                    type: 'pot',
+                    images: [
+                        'vase2.png',
+                        'vase2_remove.png',
+                        'vase4.png'
+                    ],
+                    description: 'Набор глиняной посуды: Этот набор, состоящий из кувшина и стаканов, изготовлен из натуральной глины, которая обладает уникальными свойствами. Вода, хранящаяся в глиняной посуде, приобретает приятный вкус и становится более полезной для здоровья. Почувствуйте разницу с этим набором, который подарит вам не только эстетическое наслаждение, но и пользу для организма.'
+                }]
+        )
+
+        function updateImages(theme) {
+            const images = document.querySelectorAll('img[data-light][data-dark]');
+            images.forEach(img => {
+                img.src = img.dataset[theme];
+            });
+        }
+
+        function updateCardHolder(cardHolder, cards) {
+            console.log(cards)
+            cardHolder.innerHTML = ''
+            let index = 0
+            for(let card of cards) {
+                const cardHTML = `
+                <div class="product-card" id="${index}">
+                    <div class="product-card__body prh">
+                        <div class="product-card__body__title">
+                            <img src="./images/favorite_disabled.png" alt="">
+                            <img src="./images/basket_disabled.png" alt="">
+                        </div>
+                        <div class="product-card__body__image">
+                            <img src="./images/${card.img}" alt="">
+                        </div>
+                    </div>
+                    <div class="product-card__footer">
+                        <div class="product-card__footer__title">
+                            <span>${card.name}</span>
+                        </div>
+                        <div class="product-card__footer__cost">
+                            <b>${card.cost}BYN</b>
+                        </div>
+                    </div>
+                </div>
+                `
+                index++
+                cardHolder.innerHTML += cardHTML
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const contacts = document.getElementById('contacts')
+
+            contacts.addEventListener('click', function () {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // или 'auto' — без анимации
+                });
+            })
+
+            const products = [
+                {
+                    name: 'Мыло ручной работы',
+                    cost: '12,99',
+                    img: 'soap.png',
+                    favorite: false,
+                    popularity: 4.5,
+                    type: 'chemistry',
+                    images: [
+                        'soap1_remove.png',
+                        'soap2.png'
+                    ],
+                    description: 'Откройте для себя гармонию природы с нашим мылом ручной работы. Чистота белого сочетается с энергией зеленых разводов, созданных с использованием натуральных красителей. Бережная формула на основе натуральных масел деликатно очищает и питает кожу, оставляя ощущение свежести и мягкости.\n' +
+                        'Обогащено маслом ши для увлажнения и эфирным маслом чайного дерева для антибактериального эффекта.',
+                    characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">2455685</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">мыло</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">белый, зелёный</span>
+                        </div>
+                        <div>
+                                <span class="key">Состав: </span><span class="value">
+                                NaOH, кокосовое масло, вода,
+                                масло ши, масло чайного дерева</span>
+                        </div>
+                        <div>
+                                <span class="key">Размеры (ШxВхТ): </span><span class="value">8см x 14см х 3см</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">210г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">разводы</span>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Вязанная игрушка “Слоник”',
+                    cost: '34,99',
+                    img: 'elephant-toy.png',
+                    favorite: true,
+                    popularity: 4.9,
+                    type: 'toy',
+                    images: [
+                        'toy2_remove.png',
+                        'toy3.png'
+                    ],
+                    description: 'Вязаный крючком слоник - друг на всю жизнь! Этот очаровательный слоник, связанный крючком с любовью и заботой, станет верным другом для вашего малыша или милым украшением вашего дома. Его мягкая пряжа приятна на ощупь, а добрые глазки-бусинки наполнены теплом. Связан из гипоаллергенной пряжи, безопасен для самых маленьких. Идеальный подарок на рождение ребенка, крестины или просто для поднятия настроения! Ручная работа делает каждого слоника уникальным, с собственным характером и очарованием.',
+                },
+                {
+                    name: 'Подвеска “Разбитое сердце”',
+                    cost: '29,99',
+                    img: 'culon.png',
+                    favorite: false,
+                    popularity: 3.8,
+                    type: 'skin',
+                    images: [
+                        'kylon4.png',
+                        'kylon4_remove.png'
+                    ],
+                    description: 'Подвеска «Разбитое сердце»: Два сердца, одно целое.\n' +
+                        'Эта уникальная подвеска состоит из двух половинок, выполненных вручную из прозрачной смолы с завораживающими красными разводами. Каждая половинка символизирует часть души, а вместе они образуют квадрат с вырезанным сердцем — символ любви, которая, даже будучи разделённой, \n' +
+                        'сохраняет свою целостность.\n' +
+                        'Носите одну половинку сами, а вторую подарите близкому человеку, чтобы всегда чувствовать связь, даже находясь вдали друг от друга. Подвеска «Разбитое сердце» – это трогательный подарок для тех, кто ценит искренние чувства и верит в силу любви.\n',
+
+                },
+                {
+                    name: 'Набор кофейных подвесок',
+                    cost: '36,99',
+                    img: 'coffee.png',
+                    favorite: false,
+                    popularity: 4.2,
+                    type: 'skin',
+                    images: [
+                        'kylon3_remove.png',
+                        'kylon3.png'
+                    ],
+                    description: 'Подвеска "Аромат кофе": Оригинальная подвеска из прозрачной эпоксидной смолы с натуральными кофейными зернами внутри. Сочетание прозрачности смолы и богатого коричневого цвета кофейных зерен создает неповторимый эффект. Этот стильный аксессуар станет прекрасным дополнением к вашему образу и напомнит о любимом напитке в течение дня.',
+
+                },
+                {
+                    name: 'Ваза глинянная',
+                    cost: '45,99',
+                    img: 'vase_main.png',
+                    favorite: true,
+                    popularity: 2.8,
+                    type: 'pot',
+                    images: [
+                        'vase1.png',
+                        'vase1_remove.png'
+                    ],
+                    description: 'Оживите свой дом с помощью этой уникальной глиняной вазы ручной работы. Каждое изделие создано с любовью и вниманием к деталям, что делает его неповторимым. Эта ваза станет прекрасным акцентом в любом интерьере, добавив ему тепла и уюта. Идеально подходит для свежих цветов, сухоцветов или просто как декоративный элемент.\n' +
+                        'Каждая ваза уникальна и может незначительно отличаться от других.',
+                    characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">2454515</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">ваза</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">коричневый</span>
+                        </div>
+                        <div>
+                                <span class="key">Материал: </span><span class="value">
+                                глина</span>
+                        </div>
+                        <div>
+                                <span class="key">Размеры (ДxВ): </span><span class="value">12см x 30см</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">520г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">натуральный</span>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Браслет сапфир',
+                    cost: '22,99',
+                    img: 'pearls-product.png',
+                    favorite: false,
+                    popularity: 4.7,
+                    type: 'skin',
+                    images: [
+                        'braslet.png',
+                        'braslet1_remove.png'
+                    ],
+                    description: 'Браслет "Сапфир": Элегантный браслет ручной работы, состоящий из нескольких нитей зеленых камней. Разнообразие оттенков, от нежного фисташкового до насыщенного изумрудного, создает неповторимый эффект. Каждый камень тщательно отобран и отполирован, чтобы подчеркнуть его природную красоту. Браслет станет прекрасным дополнением к вашему вечернему или повседневному наряду.',
+                    characteristics: `
+                        <div>
+                                <span class="key">Артикул: </span><span class="value">5444545</span>
+                        </div>
+                        <div>
+                                <span class="key">Тип: </span><span class="value">браслет</span>
+                        </div>
+                        <div>
+                                <span class="key">Цвет: </span><span class="value">зеленый</span>
+                        </div>
+                        <div>
+                                <span class="key">Размер: </span><span class="value">17-21</span>
+                        </div>
+                        <div>
+                                <span class="key">Вес: </span><span class="value">162г</span>
+                        </div>
+                        <div>
+                                <span class="key">Рисунок: </span><span class="value">натуральный</span>
+                        </div>
+                    `
+                },
+                {
+                    name: 'Вязанная игрушка “Зайчик”',
+                    cost: '35,99',
+                    img: 'rabbit-toy.png',
+                    favorite: false,
+                    popularity: 3.3,
+                    type: 'toy',
+                    images: [
+                        'toy1_remove.png',
+                        'toy4.png'
+                    ],
+                    description: 'Мягкий вязаный крючком зайчик - пушистый комочек радости! Этот милый зайчик, связанный крючком, станет любимой игрушкой вашего ребенка. Его длинные ушки так приятно обнимать, а мягкая пряжа дарит ощущение тепла и уюта. Он идеально подходит для игр, обнимашек и засыпания. Связан из мягкой и гипоаллергенной пряжи, безопасен для детей любого возраста. Каждый зайчик уникален благодаря ручной работе, с любовью связанной петля к петельке.',
+
+                },
+                {
+                    name: 'Глинянный набор посуды',
+                    cost: '78,99',
+                    img: 'posuda.png',
+                    favorite: false,
+                    popularity: 4.1,
+                    type: 'pot',
+                    images: [
+                        'vase2.png',
+                        'vase2_remove.png',
+                        'vase4.png'
+                    ],
+                    description: 'Набор глиняной посуды: Этот набор, состоящий из кувшина и стаканов, изготовлен из натуральной глины, которая обладает уникальными свойствами. Вода, хранящаяся в глиняной посуде, приобретает приятный вкус и становится более полезной для здоровья. Почувствуйте разницу с этим набором, который подарит вам не только эстетическое наслаждение, но и пользу для организма.'
+                }
+            ]
+
+            let currentStateProducts = [...products]
+
+            const popularitySelect = document.getElementById('popularitySelect');
+            const productTypeSelect = document.getElementById('productTypeSelect');
+            const cardHolder = document.getElementById('card-holder')
+
+            updateCardHolder(cardHolder, products)
+
+            popularitySelect.addEventListener('change', function() {
+                const value = popularitySelect.value;
+                if(value === 'reset') return updateCardHolder(cardHolder, products)
+
+                currentStateProducts = [...products].sort((a, b) => {
+                    if (value === 'asc') {
+                        return a.popularity > b.popularity ? 1 : a.popularity < b.popularity ? -1 : 0;
+                    } else {
+                        return a.popularity < b.popularity ? 1 : a.popularity > b.popularity ? -1 : 0;
+                    }
+                })
+                updateCardHolder(
+                    cardHolder,
+                    currentStateProducts
+                )
+            });
+
+            productTypeSelect.addEventListener('change', function() {
+                const value = productTypeSelect.value;
+                if(value === 'reset') return updateCardHolder(cardHolder, products)
+
+                currentStateProducts = products.filter(el => el.type === value)
+                updateCardHolder(
+                    cardHolder,
+                    currentStateProducts
+                )
+            })
+
+            document.querySelectorAll('.product-card').forEach(cardEl => {
+                cardEl.addEventListener('click', () => {
+                    console.log(cardEl.id)
+                    console.log(currentStateProducts)
+                    console.log(currentStateProducts[cardEl.id])
+                    const params = new URLSearchParams(currentStateProducts[cardEl.id]).toString();
+                    console.log('Карточка нажата:', cardEl.id);
+                    window.location.href = `file:///C:/projects/course_fkp/catalogue-item.html?${params}`
+                });
+            });
+
+            const map = document.querySelector('.map-img');
+
+            map.addEventListener('click', function () {
+                window.open('https://yandex.by/maps/157/minsk/?ll=27.579977%2C53.916552&z=18', '_blank');
+            })
+
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeElements = [
+                'header',
+                'footer',
+                '.catalogue-section'
+            ];
+            const darkLight = [
+                '.catalogue-section',
+                '.custom-select',
+                '.custom-select2',
+            ];
+            const themeText = [
+                'h1',
+                'h2',
+                'h3',
+                'a'
+            ];
+            // можешь добавить любые селекторы
+
+            // Применяем тему при загрузке
+            (function () {
+                const savedTheme = localStorage.getItem('theme');
+                console.log(savedTheme)
+                updateImages(savedTheme)
+                if (savedTheme === 'dark') {
+                    themeElements.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        console.log(el)
+                        if(selector === '.director' || selector === '.catalogue-section') {
+                            el.classList.add('dark-light')
+                        } else if (el) {
+                            el.classList.add('dark');
+                        }
+                    });
+
+                    darkLight.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        if (el) {
+                            if (el) {
+                                el.classList.add('dark-light');
+                            }
+                        }
+                    });
+
+                    themeText.forEach(selector => {
+                        const el = document.querySelectorAll(selector);
+                        console.log(el)
+                        if (el) {
+                            console.log(el)
+                            console.log(el.classList)
+                            el.forEach(elem => {
+                                elem.classList.add('dark-text');
+                            });
+                        }
+                    });
+                }
+            })();
+
+            toggleBtn.addEventListener('click', () => {
+                let isDark;
+
+                themeElements.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark');
+                        }
+                    }
+                });
+
+                darkLight.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark-light');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark-light');
+                        }
+                    }
+                });
+
+                themeText.forEach(selector => {
+                    const el = document.querySelectorAll(selector);
+                    if (el) {
+                        el.forEach(elem => {
+                            elem.classList.toggle('dark-text');
+                        })
+
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el[0].classList.contains('dark-text');
+                        }
+                    }
+                });
+
+                updateImages(isDark ? 'dark' : 'light')
+
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+<header class="header" id="header">
+    <div class="header__container">
+        <div class="header-fix">
+            <div class="header__logo">
+                <a href="file:///C:/projects/course_fkp/main.html">
+                    <img
+                            src="./images/logo_light.png"
+                            data-light="./images/logo_light.png"
+                            data-dark="./images/logo_dark.png"
+                            alt="Soulmade Logo"/>
+                </a>
+            </div>
+            <nav class="header__nav">
+                <a href="file:///C:/projects/course_fkp/catalogue.html">Каталог</a>
+                <a href="#" id="contacts">Контакты</a>
+            </nav>
+        </div>
+
+        <div class="header__right">
+            <div class="header__search">
+                <input type="text" placeholder="Поиск…"/>
+                <button><i class="icon-search"></i></button>
+            </div>
+            <button class="icon-button" id="theme-toggle">
+                <img
+                        src="./images/theme_switcher.png"
+                        data-light="./images/theme_switcher.png"
+                        data-dark="./images/theme-switcher_dark.png"
+                >
+            </button>
+            <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                    src="./images/profile_light.png"
+                    data-light="./images/profile_light.png"
+                    data-dark="./images/profile_dark.png"
+            ></a>
+        </div>
+    </div>
+</header>
+    <section class="catalogue-section">
+        <div class="catalogue-section__main-wrapper">
+            <div class="catalogue-section__main-wrapper__title">
+                <h1>КАТАЛОГ</h1>
+            </div>
+            <div class="catalogue-section__main-wrapper__filters">
+                <div>
+                    <select id="popularitySelect" class="custom-select">
+                        <option value="" disabled selected hidden>По популярности</option>
+                        <option value="reset">Сбросить фильтр</option>
+                        <option value="asc">По возрастанию</option>
+                        <option value="desc">По убыванию</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="productTypeSelect" class="custom-select custom-select2">
+                        <option value="" disabled selected hidden>Тип изделия</option>
+                        <option value="reset">Сбросить фильтр</option>
+                        <option value="toy">Игрушка</option>
+                        <option value="pot">Посуда</option>
+                        <option value="skin">Украшение</option>
+                        <option value="chemistry">Прочее</option>
+                    </select>
+                </div>
+            </div>
+            <div class="catalogue-section__main-wrapper__body" id="card-holder">
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="product-card">-->
+<!--                    <div class="product-card__body">-->
+<!--                        <div class="product-card__body__title">-->
+<!--                            <img src="./images/favorite_disabled.png" alt="">-->
+<!--                            <img src="./images/basket_disabled.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="product-card__body__image">-->
+<!--                            <img src="./images/soap.png" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="product-card__footer">-->
+<!--                        <div class="product-card__footer__title">-->
+<!--                            <span>Мыло ручной работы</span>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__footer__cost">-->
+<!--                            <b>12,99BYN</b>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+    </section>
+<footer>
+    <div class="footer-top">
+        <div class="footer-top__column">
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title">
+                        <a href="tel:+375290001122" class="text" style="text-decoration: none; color: inherit;">+375 (29) 000-11-22</a>
+                    </span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Круглосуточный телефон call-центра</span>
+                </div>
+            </div>
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title text">Ул. веры хоружей 1а, минск</span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Наш магазин</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">О НАС</span>
+            </div>
+            <p class="text">
+                Политика обработки
+                персональных данных
+            </p>
+            <p class="text">
+                Вакансии
+            </p>
+            <p class="text">
+                Настройки cookies
+            </p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КЛИЕНТАМ</span>
+            </div>
+            <p class="text">Оплата и доставка</p>
+            <p class="text">Возврат товара</p>
+            <p class="text">Бонусная программа</p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КОНТАКТЫ</span>
+            </div>
+            <div class="text">Служба поддержки</div>
+            <div class="text">HR-специалист</div>
+            <div class="text">Жалобы и предложения</div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <img src="./images/map-img.png" alt="" class="map-img prh">
+    </div>
+</footer>
+</body>
+</html>

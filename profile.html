@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #474642;
+        }
+
+        .header {
+            height: 60px;
+            background: #FAF7F0;
+        }
+
+        .dark {
+            background: #474642 !important;
+            color: #E7E0CE !important;
+        }
+
+        .dark-text {
+            color: #E7E0CE !important;
+        }
+
+        .dark-light {
+            background: #635E5B !important;
+            color: #E7E0CE !important;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+        }
+
+        /*.header__logo img {*/
+        /*    height: 32px;*/
+        /*}*/
+
+        .header__nav a {
+            margin: 0 16px;
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+
+        .header__right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__search {
+            position: relative;
+            margin-right: 16px;
+        }
+
+        .header__search input {
+            padding: 6px 28px 6px 8px;
+            border: none;
+            border-bottom: 1px solid #333;
+            background: transparent;
+            outline: none;
+        }
+
+        .img-wrapper {
+            background: #FAF7F0;
+            border-radius: 10px;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .header__search button {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 12px;
+            font-size: 18px;
+        }
+
+        .item-section {
+            background: #E7E0CE;
+        }
+
+        .cabinet-section {
+            background: #f5efdf;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .section {
+            flex: 1 1 300px;
+        }
+
+        .section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+        }
+
+        /*.card img {*/
+        /*    width: 60px;*/
+        /*    height: 60px;*/
+        /*    object-fit: cover;*/
+        /*    border-radius: 10px;*/
+        /*    margin-right: 1rem;*/
+        /*}*/
+
+        .card .info {
+            flex-grow: 1;
+        }
+
+        .card .info span {
+            display: block;
+            font-size: 1rem;
+        }
+
+        .card .info b {
+            font-size: 1.1rem;
+        }
+
+        .card input[type="radio"] {
+            margin-right: 1rem;
+        }
+
+        .submit-btn {
+            background: #ff7a00;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .favorites .card {
+            justify-content: start;
+        }
+
+        .basket-icon {
+            margin-right: 0.5rem;
+        }
+        .text:hover {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .prh:hover {
+            border: 2px solid black;
+        }
+
+        footer {
+            padding: 100px;
+            background: #635E5B;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            row-gap: 24px;
+        }
+
+        .footer-top {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-top__column {
+            display: flex;
+            flex-direction: column;
+            row-gap: 8px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            width: 100%;
+            justify-content: end;
+        }
+
+        .map-img {
+            cursor: pointer;
+        }
+
+        .footer-title {
+            font-size: 26px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(250, 247, 240, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f9f3eb;
+            padding: 24px;
+            border-radius: 10px;
+            position: relative;
+            max-width: 360px;
+            width: 90%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .modal-content input {
+            display: block;
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .submit-btn1 {
+            background-color: #ff7a00;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        input[type="radio"] {
+            accent-color: #F88B38; /* любой цвет */
+            cursor: pointer;
+        }
+
+        .modal-input input{
+            background-color: #E7E0CE;
+        }
+
+        .header-fix {
+            display: flex;
+            align-items: center;
+            column-gap: 24px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const modal = document.getElementById('modal');
+            const openBtn = document.getElementById('open-modal');
+            const closeBtn = document.getElementById('close-modal');
+
+            openBtn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+// Закрытие при клике вне окна
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            function updateImages(theme) {
+                const images = document.querySelectorAll('img[data-light][data-dark]');
+                images.forEach(img => {
+                    img.src = img.dataset[theme];
+                });
+            }
+
+            const toggleBtn = document.getElementById('theme-toggle');
+            const themeElements = [
+                'header',
+                'footer',
+                '.description',
+            ];
+            const manyElements = [
+                '.card',
+                '.modal-input'
+            ]
+            const darkLight = [
+                '.cabinet-section',
+                '.modal-content'
+            ];
+            const themeText = [
+                'h1',
+                'h2',
+                'h3',
+                'a',
+                '.key'
+            ];
+            // можешь добавить любые селекторы
+
+            // Применяем тему при загрузке
+            (function () {
+                const savedTheme = localStorage.getItem('theme');
+                console.log(savedTheme)
+                updateImages(savedTheme)
+                if (savedTheme === 'dark') {
+                    themeElements.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        console.log(el)
+                        if (selector === '.director' || selector === '.catalogue-section') {
+                            el.classList.add('dark-light')
+                        } else if (el) {
+                            el.classList.add('dark');
+                        }
+                    });
+
+                    darkLight.forEach(selector => {
+                        const el = document.querySelector(selector);
+                        if (el) {
+                            if (el) {
+                                el.classList.add('dark-light');
+                            }
+                        }
+                    });
+
+                    themeText.forEach(selector => {
+                        const el = document.querySelectorAll(selector);
+                        console.log(el)
+                        if (el) {
+                            console.log(el)
+                            console.log(el.classList)
+                            el.forEach(elem => {
+                                elem.classList.add('dark-text');
+                            });
+                        }
+                    });
+
+                    manyElements.forEach(selector => {
+                        const el = document.querySelectorAll(selector);
+                        console.log(el)
+                        if (el) {
+                            el.forEach(elem => {
+                                elem.classList.add('dark');
+                            });
+                        }
+                    });
+                }
+            })();
+
+            toggleBtn.addEventListener('click', () => {
+                let isDark;
+
+                themeElements.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark');
+                        }
+                    }
+                });
+
+                darkLight.forEach(selector => {
+                    const el = document.querySelector(selector);
+                    if (el) {
+                        el.classList.toggle('dark-light');
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el.classList.contains('dark-light');
+                        }
+                    }
+                });
+
+                themeText.forEach(selector => {
+                    const el = document.querySelectorAll(selector);
+                    if (el) {
+                        el.forEach(elem => {
+                            elem.classList.toggle('dark-text');
+                        })
+
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el[0].classList.contains('dark-text');
+                        }
+                    }
+                });
+
+                manyElements.forEach(selector => {
+                    const el = document.querySelectorAll(selector);
+                    if (el) {
+                        el.forEach(elem => {
+                            elem.classList.toggle('dark');
+                        })
+
+                        // Проверим только у первого найденного элемента
+                        if (isDark === undefined) {
+                            isDark = el[0].classList.contains('dark');
+                        }
+                    }
+                });
+
+                updateImages(isDark ? 'dark' : 'light')
+
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            const contacts = document.getElementById('contacts')
+
+            contacts.addEventListener('click', function () {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // или 'auto' — без анимации
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+<header class="header" id="header">
+    <div class="header__container">
+        <div class="header-fix"><div class="header__logo">
+            <a href="file:///C:/projects/course_fkp/main.html">
+                <img
+                        src="./images/logo_light.png"
+                        data-light="./images/logo_light.png"
+                        data-dark="./images/logo_dark.png"
+                        alt="Soulmade Logo"/>
+            </a>
+        </div>
+            <nav class="header__nav">
+                <a href="file:///C:/projects/course_fkp/catalogue.html">Каталог</a>
+                <a href="#" id="contacts">Контакты</a>
+            </nav></div>
+
+        <div class="header__right">
+            <div class="header__search">
+                <input type="text" placeholder="Поиск…"/>
+                <button><i class="icon-search"></i></button>
+            </div>
+            <button class="icon-button" id="theme-toggle">
+                <img
+                        src="./images/theme_switcher.png"
+                        data-light="./images/theme_switcher.png"
+                        data-dark="./images/theme-switcher_dark.png"
+                >
+            </button>
+            <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                    src="./images/profile_light.png"
+                    data-light="./images/profile_light.png"
+                    data-dark="./images/profile_dark.png"
+            ></a>
+        </div>
+    </div>
+</header>
+<section class="cabinet-section">
+    <h1>ЛИЧНЫЙ КАБИНЕТ</h1>
+    <div class="container">
+        <div class="section basket">
+            <h2>КОРЗИНА</h2>
+            <div class="card">
+                <input type="radio" name="cartItem" checked />
+                <div class="img-wrapper">
+                    <img src="./images/small-toy1.png" alt="Слоник" />
+                </div>
+                <div class="info">
+                    <span>Вязанная игрушка "Слоник"</span>
+                    <b>34,99 BYN</b>
+                </div>
+            </div>
+            <div class="card">
+                <input type="radio" name="cartItem" />
+                <div class="img-wrapper">
+                    <img src="./images/small-culon.png" alt="Браслет" />
+                </div>
+                <div class="info">
+                    <span>Браслет сапфир</span>
+                    <b>22,99 BYN</b>
+                </div>
+            </div>
+            <button id="open-modal" class="submit-btn text">Оставить заявку</button>
+        </div>
+
+        <div class="section favorites">
+            <h2>ИЗБРАННОЕ</h2>
+            <div class="card">
+                <div>
+                    <img class="basket-icon" src="./images/small-basket.png"
+                         data-light="./images/small-basket.png"
+                         data-dark="./images/basket_dark.png"
+                         alt="Корзина" />
+                </div>
+                <div class="img-wrapper">
+                    <img src="./images/small-heart.png" alt="Разбитое сердце" />
+                </div>
+                <div class="info">
+                    <span>Подвеска "Разбитое сердце"</span>
+                    <b>29,99 BYN</b>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    <img class="basket-icon" src="./images/small-basket.png"
+                         data-light="./images/small-basket.png"
+                         data-dark="./images/basket_dark.png"
+                         alt="Корзина" />
+                </div>
+                <div class="img-wrapper">
+                    <img src="./images/small-toy2.png" alt="Зайчик" />
+                </div>
+                <div class="info">
+                    <span>Вязанная игрушка "Зайчик"</span>
+                    <b>35,99 BYN</b>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer-top">
+        <div class="footer-top__column">
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title">
+                        <a href="tel:+375290001122" class="text" style="text-decoration: none; color: inherit;">+375 (29) 000-11-22</a>
+                    </span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Круглосуточный телефон call-центра</span>
+                </div>
+            </div>
+            <div class="footer-top__column__el">
+                <div class="el__title">
+                    <span class="footer-title text">Ул. веры хоружей 1а, минск</span>
+                </div>
+                <div class="el__subtitle">
+                    <span class="text">Наш магазин</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">О НАС</span>
+            </div>
+            <p class="text">
+                Политика обработки
+                персональных данных
+            </p>
+            <p class="text">
+                Вакансии
+            </p>
+            <p class="text">
+                Настройки cookies
+            </p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КЛИЕНТАМ</span>
+            </div>
+            <p class="text">Оплата и доставка</p>
+            <p class="text">Возврат товара</p>
+            <p class="text">Бонусная программа</p>
+        </div>
+        <div class="footer-top__column">
+            <div>
+                <span class="footer-title text">КОНТАКТЫ</span>
+            </div>
+            <div class="text">Служба поддержки</div>
+            <div class="text">HR-специалист</div>
+            <div class="text">Жалобы и предложения</div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <img src="./images/map-img.png" alt="" class="map-img prh">
+    </div>
+</footer>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <h2>
+            <b>
+                ОСТАВЬТЕ ЗАЯВКУ
+            </b>
+        </h2>
+        <p>наш сотрудник поможет сделать заказ уникальным и оформить его</p>
+
+        <input class="modal-input" type="text" placeholder="Введите своё имя" value="Мария" />
+        <input class="modal-input" type="text" placeholder="Введите свой номер телефона" value="+375 29 111-22-33" />
+
+        <button class="submit-btn1">Отправить заявку</button>
+        <span id="close-modal" class="close">&times;</span>
+    </div>
+</div>
+</body>
+</html>
