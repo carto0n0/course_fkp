@@ -1,2 +1,2 @@
 # hand-made
-https://carto0n0.github.io/course_fkp/
+git@github.com:carto0n0/course_fkp.git
