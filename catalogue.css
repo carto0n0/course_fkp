@@ -34,11 +34,6 @@ h3 {
     color: #474642;
 }
 
-.header {
-    height: 60px;
-    background: #FAF7F0;
-}
-
 .dark {
     background: #474642 !important;
     color: #E7E0CE !important;
@@ -53,23 +48,35 @@ h3 {
     color: #E7E0CE !important;
 }
 
+.header {
+    height: 52px;
+    background: #FAF7F0;
+}
+
+.header__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 .header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 12px 32px;
+    width: 97%;
+    background-color: #E7E0CE; 
 }
 
-/*.header__logo img {*/
-/*    height: 32px;*/
-/*}*/
 
 .header__nav a {
     margin: 0 16px;
     text-decoration: none;
     color: #000;
     font-weight: 500;
-}
+} 
 
 .header__right {
     display: flex;

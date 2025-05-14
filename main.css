@@ -26,16 +26,27 @@ h3 {
 }
 
 .header {
-    height: 60px;
+    height: 52px;
     background: #FAF7F0;
+}
+
+.header__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 24px;
+    padding: 12px 32px;
+    width: 97%;
+    background-color: #E7E0CE; 
 }
+
 
 .header__nav a {
     margin: 0 16px;
@@ -43,7 +54,6 @@ h3 {
     color: #000;
     font-weight: 500;
 }
-
 .orange {
     color: #F88B38;
 }
@@ -225,9 +235,9 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 28px 10px 28px;
+    padding: 16px 32px 16px 32px;
     color: white;
-    column-gap: 16px;
+    column-gap: 22px;
 }
 
 .toys-myagk {}

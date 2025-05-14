@@ -49,7 +49,9 @@
 
             const toggleBtn = document.getElementById('theme-toggle');
             const themeElements = [
-                'header',
+                '.header',
+                '.header__white-bar',
+                '.header__container',
                 '.product1',
                 '.product2',
                 '.product3',
@@ -159,40 +161,44 @@
 <body>
 <!--<a href="file:///C:/projects/course_fkp/catalogue.html">Каталог</a>-->
 <header class="header" id="header">
-    <div class="header__container">
-        <div class="header-fix">
-            <div class="header__logo">
-                <a href="file:///C:/projects/course_fkp/main.html">
+    <div class="header__wrapper">
+        <div class="header__container">
+            <!-- Основное содержимое хедера -->
+            <div class="header-fix">
+                <div class="header__logo">
+                    <a href="file:///C:/projects/course_fkp/main.html">
+                        <img
+                                src="./images/logo_light.png"
+                                data-light="./images/logo_light.png"
+                                data-dark="./images/logo_dark.png"
+                                alt="Soulmade Logo"/>
+                    </a>
+                </div>
+                <nav class="header__nav">
+                    <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
+                    <a href="#" class="text" id="contacts">Контакты</a>
+                </nav>
+            </div>
+            <div class="header__right">
+                <div class="header__search">
+                    <input type="text" placeholder="Поиск…"/>
+                    <button><i class="icon-search"></i></button>
+                </div>
+                <button class="icon-button" id="theme-toggle">
                     <img
-                            src="./images/logo_light.png"
-                            data-light="./images/logo_light.png"
-                            data-dark="./images/logo_dark.png"
-                            alt="Soulmade Logo"/>
-                </a>
+                            src="./images/theme_switcher.png"
+                            data-light="./images/theme_switcher.png"
+                            data-dark="./images/theme-switcher_dark.png"
+                    >
+                </button>
+                <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                        src="./images/profile_light.png"
+                        data-light="./images/profile_light.png"
+                        data-dark="./images/profile_dark.png"
+                ></a>
             </div>
-            <nav class="header__nav">
-                <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
-                <a href="#" class="text" id="contacts">Контакты</a>
-            </nav>
         </div>
-        <div class="header__right">
-            <div class="header__search">
-                <input type="text" placeholder="Поиск…"/>
-                <button><i class="icon-search"></i></button>
-            </div>
-            <button class="icon-button" id="theme-toggle">
-                <img
-                        src="./images/theme_switcher.png"
-                        data-light="./images/theme_switcher.png"
-                        data-dark="./images/theme-switcher_dark.png"
-                >
-            </button>
-            <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
-                    src="./images/profile_light.png"
-                    data-light="./images/profile_light.png"
-                    data-dark="./images/profile_dark.png"
-            ></a>
-        </div>
+        <div class="header__white-bar dark-light"></div>
     </div>
 </header>
 <section class="intro">
@@ -609,4 +615,176 @@
     </div>
 </footer>
 </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+    <style>
+        /* Добавляем стили для бургер-меню */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .burger-icon {
+            width: 25px;
+            height: 3px;
+            background-color: #000;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        .header__nav.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        .header__right.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            .header__nav,
+            .header__right {
+                display: none;
+            }
+            
+            .header__container {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            
+            .header-fix {
+                flex: 1;
+            }
+            
+            .header__white-bar {
+                order: 3;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header" id="header">
+    <div class="header__wrapper">
+        <div class="header__container">
+            <!-- Основное содержимое хедера -->
+            <div class="header-fix">
+                <div class="header__logo">
+                    <a href="file:///C:/projects/course_fkp/main.html">
+                        <img
+                                src="./images/logo_light.png"
+                                data-light="./images/logo_light.png"
+                                data-dark="./images/logo_dark.png"
+                                alt="Soulmade Logo"/>
+                    </a>
+                </div>
+                <div class="burger-menu" id="burger-menu">
+                    <div class="burger-icon"></div>
+                    <div class="burger-icon"></div>
+                    <div class="burger-icon"></div>
+                </div>
+                <nav class="header__nav">
+                    <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
+                    <a href="#" class="text" id="contacts">Контакты</a>
+                </nav>
+            </div>
+            <div class="header__right">
+                <div class="header__search">
+                    <input type="text" placeholder="Поиск…"/>
+                    <button><i class="icon-search"></i></button>
+                </div>
+                <button class="icon-button" id="theme-toggle">
+                    <img
+                            src="./images/theme_switcher.png"
+                            data-light="./images/theme_switcher.png"
+                            data-dark="./images/theme-switcher_dark.png"
+                    >
+                </button>
+                <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                        src="./images/profile_light.png"
+                        data-light="./images/profile_light.png"
+                        data-dark="./images/profile_dark.png"
+                ></a>
+            </div>
+        </div>
+        <div class="header__white-bar dark-light"></div>
+    </div>
+</header>
+
+<script>
+    // Остальной ваш JavaScript код
+    
+    // Добавляем обработчик для бургер-меню
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.getElementById('burger-menu');
+        const headerNav = document.querySelector('.header__nav');
+        const headerRight = document.querySelector('.header__right');
+        
+        burgerMenu.addEventListener('click', function() {
+            this.classList.toggle('active');
+            headerNav.classList.toggle('active');
+            headerRight.classList.toggle('active');
+            
+            // Анимация бургер-иконки
+            const burgerIcons = this.querySelectorAll('.burger-icon');
+            if (this.classList.contains('active')) {
+                burgerIcons[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                burgerIcons[1].style.opacity = '0';
+                burgerIcons[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                burgerIcons[0].style.transform = 'none';
+                burgerIcons[1].style.opacity = '1';
+                burgerIcons[2].style.transform = 'none';
+            }
+        });
+        
+        // Закрываем меню при клике на ссылку
+        document.querySelectorAll('.header__nav a, .header__right a').forEach(link => {
+            link.addEventListener('click', function() {
+                burgerMenu.classList.remove('active');
+                headerNav.classList.remove('active');
+                headerRight.classList.remove('active');
+                
+                // Возвращаем бургер-иконку в исходное состояние
+                const burgerIcons = burgerMenu.querySelectorAll('.burger-icon');
+                burgerIcons[0].style.transform = 'none';
+                burgerIcons[1].style.opacity = '1';
+                burgerIcons[2].style.transform = 'none';
+            });
+        });
+    });
+</script>
+</body>
+</html>
 </html>

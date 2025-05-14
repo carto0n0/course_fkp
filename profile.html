@@ -17,11 +17,6 @@
             color: #474642;
         }
 
-        .header {
-            height: 60px;
-            background: #FAF7F0;
-        }
-
         .dark {
             background: #474642 !important;
             color: #E7E0CE !important;
@@ -36,24 +31,35 @@
             color: #E7E0CE !important;
         }
 
-        .header__container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 24px;
-        }
+        .header {
+    height: 52px;
+    background: #FAF7F0;
+}
 
-        /*.header__logo img {*/
-        /*    height: 32px;*/
-        /*}*/
+.header__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
 
-        .header__nav a {
-            margin: 0 16px;
-            text-decoration: none;
-            color: #000;
-            font-weight: 500;
-        }
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 32px;
+    width: 100%;
+    background-color: #E7E0CE; 
+}
 
+
+.header__nav a {
+    margin: 0 16px;
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+} 
         .header__right {
             display: flex;
             align-items: center;
@@ -341,7 +347,9 @@
 
             const toggleBtn = document.getElementById('theme-toggle');
             const themeElements = [
-                'header',
+            '.header',
+                '.header__white-bar',
+                '.header__container',
                 'footer',
                 '.description',
             ];
@@ -481,42 +489,47 @@
     </script>
 </head>
 <body>
-<header class="header" id="header">
-    <div class="header__container">
-        <div class="header-fix"><div class="header__logo">
-            <a href="file:///C:/projects/course_fkp/main.html">
-                <img
-                        src="./images/logo_light.png"
-                        data-light="./images/logo_light.png"
-                        data-dark="./images/logo_dark.png"
-                        alt="Soulmade Logo"/>
-            </a>
-        </div>
-            <nav class="header__nav">
-                <a href="file:///C:/projects/course_fkp/catalogue.html">Каталог</a>
-                <a href="#" id="contacts">Контакты</a>
-            </nav></div>
-
-        <div class="header__right">
-            <div class="header__search">
-                <input type="text" placeholder="Поиск…"/>
-                <button><i class="icon-search"></i></button>
+    <header class="header" id="header">
+        <div class="header__wrapper">
+            <div class="header__container">
+                <!-- Основное содержимое хедера -->
+                <div class="header-fix">
+                    <div class="header__logo">
+                        <a href="file:///C:/projects/course_fkp/main.html">
+                            <img
+                                    src="./images/logo_light.png"
+                                    data-light="./images/logo_light.png"
+                                    data-dark="./images/logo_dark.png"
+                                    alt="Soulmade Logo"/>
+                        </a>
+                    </div>
+                    <nav class="header__nav">
+                        <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
+                        <a href="#" class="text" id="contacts">Контакты</a>
+                    </nav>
+                </div>
+                <div class="header__right">
+                    <div class="header__search">
+                        <input type="text" placeholder="Поиск…"/>
+                        <button><i class="icon-search"></i></button>
+                    </div>
+                    <button class="icon-button" id="theme-toggle">
+                        <img
+                                src="./images/theme_switcher.png"
+                                data-light="./images/theme_switcher.png"
+                                data-dark="./images/theme-switcher_dark.png"
+                        >
+                    </button>
+                    <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                            src="./images/profile_light.png"
+                            data-light="./images/profile_light.png"
+                            data-dark="./images/profile_dark.png"
+                    ></a>
+                </div>
             </div>
-            <button class="icon-button" id="theme-toggle">
-                <img
-                        src="./images/theme_switcher.png"
-                        data-light="./images/theme_switcher.png"
-                        data-dark="./images/theme-switcher_dark.png"
-                >
-            </button>
-            <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
-                    src="./images/profile_light.png"
-                    data-light="./images/profile_light.png"
-                    data-dark="./images/profile_dark.png"
-            ></a>
+            <div class="header__white-bar dark-light"></div>
         </div>
-    </div>
-</header>
+    </header>
 <section class="cabinet-section">
     <h1>ЛИЧНЫЙ КАБИНЕТ</h1>
     <div class="container">
@@ -640,19 +653,322 @@
 </footer>
 <div id="modal" class="modal">
     <div class="modal-content">
-        <h2>
-            <b>
-                ОСТАВЬТЕ ЗАЯВКУ
-            </b>
-        </h2>
+        <h2><b>ОСТАВЬТЕ ЗАЯВКУ</b></h2>
         <p>наш сотрудник поможет сделать заказ уникальным и оформить его</p>
 
-        <input class="modal-input" type="text" placeholder="Введите своё имя" value="Мария" />
-        <input class="modal-input" type="text" placeholder="Введите свой номер телефона" value="+375 29 111-22-33" />
+        <input class="modal-input" type="text" placeholder="Введите своё имя" />
+        <input class="modal-input" type="text" placeholder="Введите свой номер телефона" />
 
-        <button class="submit-btn1">Отправить заявку</button>
+        <button class="submit-btn1" id="submit-application">Отправить заявку</button>
         <span id="close-modal" class="close">&times;</span>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const submitBtn = document.getElementById('submit-application');
+        
+        submitBtn.addEventListener('click', async function() {
+            const name = document.querySelector('.modal-input[placeholder="Введите своё имя"]').value;
+            const phone = document.querySelector('.modal-input[placeholder="Введите свой номер телефона"]').value;
+            
+            if (!name.trim() || !phone.trim()) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+            
+            try {
+                // 1. Проверяем поддержку Notification API
+                if (!("Notification" in window)) {
+                    throw new Error("Браузер не поддерживает уведомления");
+                }
+                
+                // 2. Проверяем текущие разрешения
+                let permission = Notification.permission;
+                
+                // 3. Если разрешение не получено, запрашиваем
+                if (permission === "default") {
+                    permission = await Notification.requestPermission();
+                }
+                
+                // 4. Если разрешение получено - показываем уведомление
+                if (permission === "granted") {
+                    new Notification('✅ Заявка отправлена!', {
+                        body: `Спасибо, ${name}! Мы свяжемся с вами по номеру ${phone}`,
+                        icon: './images/logo_light.png'
+                    });
+                } else {
+                    // 5. Если разрешения нет - показываем alert
+                    showFallbackAlert(name, phone);
+                }
+            } catch (error) {
+                console.error("Ошибка при показе уведомления:", error);
+                showFallbackAlert(name, phone);
+            }
+            
+            // Закрываем модальное окно
+            document.getElementById('modal').style.display = 'none';
+        });
+        
+        function showFallbackAlert(name, phone) {
+            alert(`Спасибо, ${name}! Ваша заявка отправлена. Мы свяжемся с вами по номеру ${phone}.`);
+        }
+    });
+</script>
 </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Все ваши текущие стили остаются без изменений */
+        
+        /* Добавляем стили для адаптивного меню */
+        .burger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-left: auto;
+        }
+        
+        .burger-icon {
+            width: 25px;
+            height: 3px;
+            background-color: #000;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #E7E0CE;
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu .header__nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu .header__right {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .mobile-menu .header__search {
+            margin-right: 0;
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .burger-menu {
+                display: block;
+            }
+            
+            .header-fix .header__nav,
+            .header__right {
+                display: none;
+            }
+            
+            .header__container {
+                padding: 12px 20px;
+            }
+            
+            .cabinet-section {
+                padding: 1.5rem;
+            }
+            
+            .footer {
+                padding: 50px 20px;
+            }
+            
+            .footer-top {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .footer-top__column {
+                width: 100%;
+            }
+            
+            .footer-bottom {
+                justify-content: center;
+            }
+            
+            .map-img {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .img-wrapper {
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            .submit-btn {
+                width: 100%;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+    <!-- Остальные ваши стили и скрипты -->
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__wrapper">
+            <div class="header__container">
+                <!-- Основное содержимое хедера -->
+                <div class="header-fix">
+                    <div class="header__logo">
+                        <a href="file:///C:/projects/course_fkp/main.html">
+                            <img
+                                    src="./images/logo_light.png"
+                                    data-light="./images/logo_light.png"
+                                    data-dark="./images/logo_dark.png"
+                                    alt="Soulmade Logo"/>
+                        </a>
+                    </div>
+                    <div class="burger-menu" id="burger-menu">
+                        <div class="burger-icon"></div>
+                        <div class="burger-icon"></div>
+                        <div class="burger-icon"></div>
+                    </div>
+                    <nav class="header__nav">
+                        <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
+                        <a href="#" class="text" id="contacts">Контакты</a>
+                    </nav>
+                </div>
+                <div class="header__right">
+                    <div class="header__search">
+                        <input type="text" placeholder="Поиск…"/>
+                        <button><i class="icon-search"></i></button>
+                    </div>
+                    <button class="icon-button" id="theme-toggle">
+                        <img
+                                src="./images/theme_switcher.png"
+                                data-light="./images/theme_switcher.png"
+                                data-dark="./images/theme-switcher_dark.png"
+                        >
+                    </button>
+                    <a class="icon-button" href="file:///C:/projects/course_fkp/profile.html"><img
+                            src="./images/profile_light.png"
+                            data-light="./images/profile_light.png"
+                            data-dark="./images/profile_dark.png"
+                    ></a>
+                </div>
+            </div>
+            <div class="header__white-bar dark-light"></div>
+        </div>
+        <!-- Мобильное меню -->
+        <div class="mobile-menu" id="mobile-menu">
+            <nav class="header__nav">
+                <a href="file:///C:/projects/course_fkp/catalogue.html" class="text">Каталог</a>
+                <a href="#" class="text mobile-contacts">Контакты</a>
+            </nav>
+            <div class="header__right">
+                <div class="header__search">
+                    <input type="text" placeholder="Поиск…"/>
+                    <button><i class="icon-search"></i></button>
+                </div>
+                <div class="mobile-theme-toggle">
+                    <button class="icon-button" id="mobile-theme-toggle">
+                        <img
+                                src="./images/theme_switcher.png"
+                                data-light="./images/theme_switcher.png"
+                                data-dark="./images/theme-switcher_dark.png"
+                        >
+                        <span>Сменить тему</span>
+                    </button>
+                </div>
+                <a class="icon-button mobile-profile" href="file:///C:/projects/course_fkp/profile.html">
+                    <img
+                            src="./images/profile_light.png"
+                            data-light="./images/profile_light.png"
+                            data-dark="./images/profile_dark.png"
+                    >
+                    <span>Профиль</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Остальная часть вашего HTML кода -->
+
+    <script>
+        // Добавляем обработчик для бургер-меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerMenu = document.getElementById('burger-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const themeToggle = document.getElementById('theme-toggle');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            const contacts = document.getElementById('contacts');
+            const mobileContacts = document.querySelector('.mobile-contacts');
+            
+            // Обработчик бургер-меню
+            burgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                
+                // Анимация бургер-иконки
+                const burgerIcons = this.querySelectorAll('.burger-icon');
+                if (this.classList.contains('active')) {
+                    burgerIcons[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                    burgerIcons[1].style.opacity = '0';
+                    burgerIcons[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+                } else {
+                    burgerIcons[0].style.transform = 'none';
+                    burgerIcons[1].style.opacity = '1';
+                    burgerIcons[2].style.transform = 'none';
+                }
+            });
+            
+            // Синхронизация кликов по кнопкам темы
+            mobileThemeToggle.addEventListener('click', function() {
+                themeToggle.click();
+            });
+            
+            // Синхронизация кликов по контактам
+            mobileContacts.addEventListener('click', function(e) {
+                e.preventDefault();
+                contacts.click();
+                burgerMenu.click(); // Закрываем меню после клика
+            });
+            
+            // Закрываем меню при клике на ссылки
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                if (!link.classList.contains('mobile-contacts')) {
+                    link.addEventListener('click', function() {
+                        burgerMenu.click();
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
 </html>
